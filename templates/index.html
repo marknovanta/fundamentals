@@ -103,7 +103,7 @@
                         <td style="color: #{{ '3dfc03' if i['payoutRatio_last'] < 0.75 else 'fc0303'}};">
                             {{ '%0.1f' % (i['payoutRatio_last']*100) }}%</td>
                         <td style="color: #{{ '3dfc03' if i['payoutRatio_AVG'] < 0.75 else 'fc0303'}};">
-                            {{ '%0.1f' % (i['payoutRatio_AVG']) }}%</td>
+                            {{ '%0.1f' % (i['payoutRatio_AVG']*100) }}%</td>
 
                         <td style="color: #{{ '3dfc03' if i['netIncomePerShare_last'] > 0 else 'fc0303'}};">
                             {{ '${:,.2f}'.format(i['netIncomePerShare_last']) }}</td>
