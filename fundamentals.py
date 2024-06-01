@@ -11,6 +11,7 @@ ticker = ['AAPL']
 def get_fundamentals(tickers):
     load_dotenv()
     api_key = os.getenv('api_key')
+    output = []
     for t in tickers:
         url = f'https://financialmodelingprep.com/api/v3/key-metrics/{t}?period=annual&apikey={api_key}'
         try:
@@ -100,6 +101,9 @@ def get_fundamentals(tickers):
             roe_change = (roe_list[0]-roe_list[-1])/roe_list[-1]
 
             final_data = {
+                'ticker': t,
+                'current_price': current_price,
+
                 'earningsYield_last': earningsYield_list[0],
                 'dividendYield_last': dividendYield_list[0],
                 'payoutRatio_last': payoutRatio_list[0],
@@ -139,14 +143,11 @@ def get_fundamentals(tickers):
                 'roe_change': roe_change
             }
 
-            print(f'{t} - ${current_price}')
-            for key, value in final_data.items():
-                print(f'{key}: {value}')
-            return final_data
+            output.append(final_data)
 
 
         else:
             print('No data or not enough data')
-            return {}
+            continue
 
-get_fundamentals(ticker)
+    return output

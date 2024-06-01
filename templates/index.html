@@ -48,59 +48,124 @@
             <thead class="sticky-top">
               <tr class="--bs-light-bg-subtle">
                 <th scope="col">TICKER</th>
-                <th scope="col">NAME</th>
-                <th scope="col">SECTOR</th>
-                <th scope="col">INITIAL BALANCE</th>
-                <th scope="col">FINAL BALANCE</th>
-                <th scope="col">YIELD</th>
-                <th scope="col">CAGR</th>
-                <th scope="col">YEARS</th>
-                <th scope="col">TRADES</th>
-                <!-- <th scope="col">WIN RATE</th> -->
+                <th scope="col">PRICE</th>
 
-                <th scope="col">ENTRY<br>EXIT</th>
-
-                <th scope="col">DIV YIELD</th>
+                <th scope="col">EPS YLD</th>
+                <th scope="col">DIV YLD</th>
                 <th scope="col">PAYOUT</th>
-                <th scope="col">P/E</th>
-                <th scope="col">CURR RATIO</th>
-                <th scope="col">DEBT/EQUITY</th>
+                <th scope="col">PAYOUT AVG</th>
+
+                <th scope="col">EPS</th>
+                <th scope="col">EPS CNG%</th>
+                <th scope="col">CASH</th>
+                <th scope="col">CASH CNG%</th>
                 <th scope="col">BOOK VALUE</th>
-                <th scope="col">CURR PRICE</th>
-                <th scope="col">P/B</th>
+                <th scope="col">BV CNG%</th>
+                <th scope="col">TBV</th>
+                <th scope="col">TBV CNH%</th>
+
+                <th scope="col">PE</th>
+                <th scope="col">PE 5Y</th>
+                <th scope="col">PB</th>
+                <th scope="col">PB 5Y</th>
+                <th scope="col">PTB</th>
+                <th scope="col">PTB 5Y</th>
+
+                <th scope="col">DEBT EQUITY</th>
+                <th scope="col">D/E AVG</th>
+                <th scope="col">D/E CNG%</th>
+                <th scope="col">CURRENT RATIO</th>
+                <th scope="col">CR AVG</th>
+                <th scope="col">CR CNG%</th>
+
+                <th scope="col">ROIC</th>
+                <th scope="col">ROIC AVG</th>
+                <th scope="col">ROIC CNG%</th>
+                <th scope="col">ROTA</th>
+                <th scope="col">ROTA AVG</th>
+                <th scope="col">ROTA CNG%</th>
+                <th scope="col">ROE</th>
+                <th scope="col">ROE AVG</th>
+                <th scope="col">ROE CNG%</th>
 
               </tr>
             </thead>
             <tbody>
                 {% for i in info %}
                     <tr>
-                        <th scope="row" style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};"><a href="https://www.tradingview.com/chart/ShaHpx54/?symbol={{ i['ticker'] }}" style="color: inherit;" target="_blank">{{ i['ticker'] }}</a></th>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ i['name'] }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ i['sector'] }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '${:,.2f}'.format(i['initial investment']) }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '${:,.2f}'.format(i['final balance']) }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '%0.1f' % (i['yield']*100) }}%</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '%0.1f' % (i['cagr']*100) }}%</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ i['period'] }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ i['trades'] }}</td>
-                        <!-- <td style="color: #{{ '3dfc03' if i['win_rate'] > 0.5 else 'fc0303'}};">{{ '%0.1f' % (i['win_rate']*100) }}%</td> -->
+                        <th scope="row" style="color: #3dfc03;">{{ i['ticker'] }}</th>
+                        <td style="color: #3dfc03;">{{ '${:,.2f}'.format(i['current_price']) }}</td>
 
-                        {% if i['entry'] == 'entry' %}
-                            <td style="background-color: #3dfc03;">ENTRY</td>
-                        {% elif i['entry'] == 'exit' %}
-                            <td style="background-color: #fc0303;">EXIT</td>
-                        {% else %}
-                            <td style="color: #212529;">wait</td>
-                        {% endif %}
+                        <td style="color: #{{ '3dfc03' if i['earningsYield_last'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['earningsYield_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['dividendYield_last'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['dividendYield_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['payoutRatio_last'] < 0.75 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['payoutRatio_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['payoutRatio_AVG'] < 0.75 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['payoutRatio_AVG']) }}%</td>
 
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '%0.1f' % (i['divYield']*100) +'%' if i['divYield'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['payout'] < 0.75 else 'fc0303'}};">{{ '%0.1f' % (i['payout']*100) +'%' if i['payout'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['pe'] < 15 else 'fc0303'}};">{{ i['pe']|round(1) if i['pe'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['current_ratio'] > 1.5 else 'fc0303'}};">{{ i['current_ratio']|round(1) if i['current_ratio'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['debt_equity'] < 50 else 'fc0303'}};">{{ (i['debt_equity']/100)|round(1) if i['debt_equity'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ '${:,.2f}'.format(i['book_value']) if i['book_value'] else '' }}</td>
-                        <td class="text-warning">{{ '${:,.2f}'.format(i['current_price']) if i['current_price'] else '' }}</td>
-                        <td style="color: #{{ '3dfc03' if i['initial investment'] < i['final balance'] else 'fc0303'}};">{{ i['pb']|round(1) if i['pb'] else '' }}</td>
+                        <td style="color: #{{ '3dfc03' if i['netIncomePerShare_last'] > 0 else 'fc0303'}};">
+                            {{ '${:,.2f}'.format(i['netIncomePerShare_last']) }}</td>
+                        <td style="color: #{{ '3dfc03' if i['netIncomePerShare_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['netIncomePerShare_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['cashPerShare_last'] > 0 else 'fc0303'}};">
+                            {{ '${:,.2f}'.format(i['cashPerShare_last']) }}</td>
+                        <td style="color: #{{ '3dfc03' if i['cashPerShare_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['cashPerShare_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['bookValuePerShare_last'] > 0 else 'fc0303'}};">
+                            {{ '${:,.2f}'.format(i['bookValuePerShare_last']) }}</td>
+                        <td style="color: #{{ '3dfc03' if i['bookValuePerShare_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['bookValuePerShare_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['tangibleBookValuePerShare_last'] > 0 else 'fc0303'}};">
+                            {{ '${:,.2f}'.format(i['tangibleBookValuePerShare_last']) }}</td>
+                        <td style="color: #{{ '3dfc03' if i['tangibleBookValuePerShare_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['tangibleBookValuePerShare_change']*100) }}%</td>
+
+                        <td style="color: #{{ '3dfc03' if i['peRatio_last'] < 15 else 'fc0303'}};">
+                            {{ '%0.1f' % i['peRatio_last'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['peRatio_on5years'] < 15 else 'fc0303'}};">
+                            {{ '%0.1f' % i['peRatio_on5years'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['pbRatio_last'] < 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['pbRatio_last'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['pbRatio_on5years'] < 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['pbRatio_on5years'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['ptbRatio_last'] < 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['ptbRatio_last'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['ptbRatio_on5years'] < 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['ptbRatio_on5years'] }}</td>
+
+                        <td style="color: #{{ '3dfc03' if i['debtToEquity_last'] < 0.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['debtToEquity_last'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['debtToEquity_AVG'] < 0.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['debtToEquity_AVG'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['debtToEquity_change'] < 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['debtToEquity_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['currentRatio_last'] > 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['currentRatio_last'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['currentRatio_AVG'] > 1.5 else 'fc0303'}};">
+                            {{ '%0.1f' % i['currentRatio_AVG'] }}</td>
+                        <td style="color: #{{ '3dfc03' if i['currentRatio_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['currentRatio_change']*100) }}%</td>
+
+                        <td style="color: #{{ '3dfc03' if i['roic_last'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roic_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['roic_AVG'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roic_AVG']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['roic_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roic_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['returnOnTangibleAssets_last'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['returnOnTangibleAssets_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['returnOnTangibleAssets_AVG'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['returnOnTangibleAssets_AVG']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['returnOnTangibleAssets_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['returnOnTangibleAssets_change']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['roe_last'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roe_last']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['roe_AVG'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roe_AVG']*100) }}%</td>
+                        <td style="color: #{{ '3dfc03' if i['roe_change'] > 0 else 'fc0303'}};">
+                            {{ '%0.1f' % (i['roe_change']*100) }}%</td>
 
                     </tr>
                 {% endfor %}
