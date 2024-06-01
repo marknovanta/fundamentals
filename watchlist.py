@@ -1,1 +1,3 @@
-tickers_list = ['AAPL']
+tickers_list = [
+    'SBUX','NWN','SWK','UGI'
+]
