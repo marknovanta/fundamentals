@@ -6,7 +6,11 @@ from statistics import mean
 
 ticker = ['AAPL']
 
-
+def replace_none_with_zero(lst):
+    for i in range(len(lst)):
+        if lst[i] is None:
+            lst[i] = 0
+    return lst
 
 def get_fundamentals(tickers):
     load_dotenv()
@@ -79,6 +83,23 @@ def get_fundamentals(tickers):
                 roic_list.append(i['roic'])
                 returnOnTangibleAssets_list.append(i['returnOnTangibleAssets'])
                 roe_list.append(i['roe'])
+
+            # clean data
+            earningsYield_list = replace_none_with_zero(earningsYield_list)
+            dividendYield_list = replace_none_with_zero(dividendYield_list)
+            payoutRatio_list = replace_none_with_zero(payoutRatio_list)
+            netIncomePerShare_list = replace_none_with_zero(netIncomePerShare_list)
+            cashPerShare_list = replace_none_with_zero(cashPerShare_list)
+            bookValuePerShare_list = replace_none_with_zero(bookValuePerShare_list)
+            tangibleBookValuePerShare_list = replace_none_with_zero(tangibleBookValuePerShare_list)
+            peRatio_list = replace_none_with_zero(peRatio_list)
+            pbRatio_list = replace_none_with_zero(pbRatio_list)
+            ptbRatio_list = replace_none_with_zero(ptbRatio_list)
+            debtToEquity_list = replace_none_with_zero(debtToEquity_list)
+            currentRatio_list = replace_none_with_zero(currentRatio_list)
+            roic_list = replace_none_with_zero(roic_list)
+            returnOnTangibleAssets_list = replace_none_with_zero(returnOnTangibleAssets_list)
+            roe_list = replace_none_with_zero(roe_list)
 
             # Calc extra data
             payoutRatio_AVG = mean(payoutRatio_list)

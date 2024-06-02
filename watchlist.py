@@ -1,3 +1,4 @@
 tickers_list = [
-    'SBUX','NWN','SWK','UGI'
+    'SWK','SYY','UVV','GRC','MDT','FELE','UMBF','AOS',
+    'PBF','FAST','GGG','AAON'
 ]
