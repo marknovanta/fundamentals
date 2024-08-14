@@ -15,5 +15,5 @@ tickers_list = [
 
 # for isolated analysis
 """ tickers_list = [
-    'UVV','GRC'
+    'AMZN','GOOGL', 'V', 'MA'
 ] """
