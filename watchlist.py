@@ -12,3 +12,8 @@ tickers_list = [
     'MO','PARA','MCO','AVGO','SEIC','VICI','ARE','EPRT','CCI','ADC','ANSS',
     'CB','DHI','TEL','PHM','SNA','STT','AWR','NWN','UGI','OXY'
 ]
+
+# for isolated analysis
+""" tickers_list = [
+    'UVV','GRC'
+] """
